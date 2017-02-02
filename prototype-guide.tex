@@ -1,0 +1,66 @@
+%documentlatex pour production du guide de l'étudiant
+
+
+%préambule
+\documentclass [12 pt]{report}
+
+%encodage unicode
+\usepackage [utf8]{inputenc}
+ %typographie française
+\usepackage [french]{babel} 
+%pour pouvoir utiliser des images
+\usepackage {graphicx} 
+ %chemin vers le répertoire 'images' qui contient les images -- conflit
+\graphicspath { {images/} } 
+%police de base extended computer modern avec encodage de Cork
+\usepackage [T1]{fontenc} 
+\usepackage{blindtext}
+
+%fin du préambule
+
+%début du document
+\begin{document}
+\begin{enumerate}
+
+%page de titre
+\begin{titlepage}
+\noindent
+\includegraphics [scale=0.6] {logo-ebsi}
+\vskip3cm
+
+{\bfseries\Large
+\centering
+Guide de l'étudiant du 1er cycle
+2016-2017 %page[1]/titre
+}
+\vfill
+\end{titlepage}
+
+%section1
+
+\item \section* {Introduction (1er cycle)}
+\blindtext
+\begin{itemize}
+\vskip1cm
+\item le certificat en archivistique;
+\item le certificat en gestion de l'information numérique;
+\item le cheminement administratif;
+\item les politiques, règlements et directives;
+\item les personnes ressources.
+\vskip1cm
+\end{itemize}
+\blindtext
+
+{\let\clearpage\relax \item \section* {Présentation de l'EBSI}}
+\blindtext
+
+{\let\clearpage\relax \item \section* {Place d'un certificat dans un cheminement universitaire (1er cycle)}}
+\blindtext
+
+{\let\clearpage\relax \item \section* {Place d'un certificat dans un cheminement universitaire (1er cycle)}}
+\blindtext
+
+
+\end{enumerate}
+%fin du document
+\end{document}
