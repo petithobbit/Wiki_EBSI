@@ -44,6 +44,20 @@
     </xsl:template>
     
     <!-- page de titre -->
+    <xsl:template match="page[1]/titre">
+    \begin{titlepage}
+    \includegraphics [scale=1] {nom_fichier_image}
+    \vskip3cm
     
+    {\bfseries\Large
+    \centering
+    Guide de l'étudiant du 1er cycle
+    2016-2017 %page[1]/titre
+    }
+    \vfill
+    \end{titlepage}
+    </xsl:template>
     
+   
+        
 </xsl:stylesheet>
