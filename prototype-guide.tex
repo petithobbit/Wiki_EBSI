@@ -1,66 +1,117 @@
-%documentlatex pour production du guide de l'étudiant
+%rendu à tutoriel https://youtu.be/H3Gw954IJ18
 
+%%préambule
+\documentclass [12 pt]{article}
 
-%préambule
-\documentclass [12 pt]{report}
-
-%encodage unicode
+%typographie française
 \usepackage [utf8]{inputenc}
- %typographie française
 \usepackage [french]{babel} 
-%pour pouvoir utiliser des images
-\usepackage {graphicx} 
- %chemin vers le répertoire 'images' qui contient les images -- conflit
-\graphicspath { {images/} } 
-%police de base extended computer modern avec encodage de Cork
 \usepackage [T1]{fontenc} 
+%
+
+%mise en page améliorée
+\usepackage [margin=3cm,includefoot]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[R]{EBSI-Guide de l'étudiant 2016-2017}
+\fancyfoot{}
+\fancyfoot[R]{\thepage\ }
+\renewcommand{\footrulewidth}{1pt}
+%
+
+%utilisation d'images
+\usepackage {graphicx} 
+\graphicspath { {/images} }
+ 
+%pour test : génération de texte automatique
 \usepackage{blindtext}
 
-%fin du préambule
+%%fin du préambule
 
-%début du document
 \begin{document}
-\begin{enumerate}
 
-%page de titre
+%page titre
 \begin{titlepage}
-\noindent
-\includegraphics [scale=0.6] {logo-ebsi}
-\vskip3cm
-
-{\bfseries\Large
-\centering
-Guide de l'étudiant du 1er cycle
-2016-2017 %page[1]/titre
-}
-\vfill
+	\begin{center}
+	%\includegraphic
+	\line(1,0){350}\\
+	\huge{\bfseries Guide de l'étudiant 2016-2017}
+	\line(1,0){350}
+	\vskip10cm
+	
+	
+	\end{center}
 \end{titlepage}
 
-%section1
 
-\item \section* {Introduction (1er cycle)}
-\blindtext
-\begin{itemize}
-\vskip1cm
-\item le certificat en archivistique;
-\item le certificat en gestion de l'information numérique;
-\item le cheminement administratif;
-\item les politiques, règlements et directives;
-\item les personnes ressources.
-\vskip1cm
-\end{itemize}
-\blindtext
+%front matter
+\pagenumbering{roman}
+\section*{Informations}
+\addcontentsline{toc}{section}{\numberline{}Informations}
 
-{\let\clearpage\relax \item \section* {Présentation de l'EBSI}}
-\blindtext
+\blindtext[1]
 
-{\let\clearpage\relax \item \section* {Place d'un certificat dans un cheminement universitaire (1er cycle)}}
-\blindtext
-
-{\let\clearpage\relax \item \section* {Place d'un certificat dans un cheminement universitaire (1er cycle)}}
-\blindtext
+Transformation du wiki effectuée le {\today} par Prénom, Nom
+\newpage
 
 
-\end{enumerate}
-%fin du document
+%table des matières
+\pagenumbering{arabic}
+\tableofcontents
+\thispagestyle{empty}
+
+
+
+
+
+
+\newpage
+\setcounter{page}{1}
+
+%corps du document
+\section{Section page 1}\label{sec:1}
+
+	\blindtext[2]
+
+
+\newpage
+\section{Section avec liste}\label{sec:2}
+	\blindtext
+
+	\begin{itemize}
+	\item Premier item
+	\item Deuxième item
+	\item Troisième item
+	\item \ldots 
+	\end{itemize}
+
+\newpage
+\section{Sections imbriquées : profondeur 1}\label{sec:3}
+	\blindtext[1]
+
+\subsection{ profondeur 2}\label{sec:3.1}
+	\blindtext[1]
+
+	\begin{itemize}
+	\item Premier item
+	\item Deuxième item
+	\end{itemize}
+
+\subsection{ profondeur 2}\label{sec:3.2}
+	\blindtext[1]
+
+\subsubsection { profondeur 3}\label{sec:3.2.1}
+	\blindtext[1]
+
+\subsubsection {profondeur 3}\label{sec:3.2.2}
+	\begin{itemize}
+	\item Premier item
+	\item Deuxième item	
+	\end{itemize}
+
+\newpage
+\section{Nouvelle section}\label{sec:4}
+	\blindtext[2]
+
+
 \end{document}
