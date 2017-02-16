@@ -21,22 +21,39 @@
     <!-- Gabarit général -->   
     
     <xsl:template match="/">
-        %documentlatex pour production du guide de l'étudiant
-        %préambule
-        \documentclass [12 pt]{report}
-        %encodage unicode
-        \usepackage [utf8]{inputenc}
+        %documentlatex pour production du guide de l'étudiant version 1.0
+        %%préambule
+        \documentclass [12 pt]{article}
+        
         %typographie française
+        \usepackage [utf8]{inputenc}
         \usepackage [french]{babel} 
-        %pour pouvoir utiliser des images
-        \usepackage {graphicx} 
-        %chemin vers le répertoire 'images' qui contient les images -- conflit
-        \graphicspath { {images/} } 
-        %police de base extended computer modern avec encodage de Cork
         \usepackage [T1]{fontenc} 
+       
+        
+        %mise en page améliorée
+        \usepackage [margin=3cm,includefoot]{geometry}
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhead[R]{EBSI-Guide de l'étudiant 2016-2017}
+        \fancyfoot{}
+        \fancyfoot[R]{\thepage\ }
+        \renewcommand{\footrulewidth}{1pt}
+      
+        
+        %utilisation d'images
+        \usepackage {graphicx} 
+        \graphicspath { {/images} }
+        
+        %préservation des hyperliens (possibilités de renvois internes avec ce package aussi)
+        %liens pdf déréférençables avec pdflatex
+        \usepackage {hyperref}
+        
+        %pour test : génération de texte automatique
         \usepackage{blindtext}
-        %fin du préambule
-        %début du document
+        
+        %%fin du préambule
+        
         \begin{document}
         
         <xsl:apply-templates/>
@@ -45,19 +62,72 @@
     
     <!-- page de titre -->
     <xsl:template match="page[1]/titre">
-    \begin{titlepage}
-    \includegraphics [scale=1] {nom_fichier_image}
-    \vskip3cm
-    
-    {\bfseries\Large
-    \centering
-    Guide de l'étudiant du 1er cycle
-    2016-2017 %page[1]/titre
-    }
-    \vfill
-    \end{titlepage}
+        %page titre
+        \begin{titlepage}
+        \begin{center}
+        %\includegraphic
+        \line(1,0){350}\\
+        \huge{\bfseries 
+        <xsl:value-of select="."/>
+        }
+        \line(1,0){350}
+        \vskip10cm
+        
+        
+        \end{center}
+        \end{titlepage}
     </xsl:template>
     
+    <!-- sections de profondeur 1-->
+    <!--@todo: pour l'instant l'extrant xml ne permat pas de traiter les différents niveaux de section-->
+    <xsl:template match="page">
+        \newpage
+        \section {
+        <xsl:value-of select="./titre"/>
+        }
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <!--traitement des H2 en gras (test)-->
+    <xsl:template match="h2">
+        \textbf{
+        <xsl:value-of select="."/>
+        }
+    </xsl:template>
+    
+    <!-- traitement du fil d'ariane du document source -->
+    <xsl:template match="title">
+        \textit{
+        <xsl:value-of select="."/>
+        }
+    </xsl:template>
+    
+    <!--traitement des url -->
+    <xsl:template match="url"/>
+        
+    <!-- traitement des paragraphes -->
+    <xsl:template match="p | h3 | h4">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+   <!-- traitement des listes -->
+    <xsl:template match="ul">
+        \begin{itemize}
+        <xsl:apply-templates/>
+        \end{itemize}
+    </xsl:template>
+    
+    <xsl:template match="li">
+        \item <xsl:value-of select="."/>
+    </xsl:template>
    
+   <!-- traitement des hyperliens -->
+    <xsl:template match="a">
+        \href{
+        <xsl:value-of select="./@href"/>
+        } {
+        <xsl:value-of select="."/>
+        }
+    </xsl:template>
         
 </xsl:stylesheet>
