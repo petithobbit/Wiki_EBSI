@@ -129,5 +129,20 @@
         <xsl:value-of select="."/>
         }
     </xsl:template>
-        
+   <!--traitement des exposants (superscript) -->
+    <xsl:template match="sup">
+        \textsuperscript{
+        <xsl:value-of select="."/>
+        }
+    </xsl:template>
+    <!-- traitement des lignes horizontales-->
+    <xsl:template match="hr">
+        \noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+    </xsl:template>
+       <!-- retrait des images -->
+    <xsl:template match="img"/>
+        <!-- le cas de span-->
+    <!-- Plusieurs cas possibles. A discuter avec Arnaud s'il est possible de nettoyer certaines balises vides-->
+       
+    
 </xsl:stylesheet>
